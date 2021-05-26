@@ -1,0 +1,12 @@
+   90  uname -r
+   91  rpmdev-setuptree
+   92  yumdownloader --source kernel
+   93  rpm -i kernel-5.12.6-300.fc34.src.rpm
+   94  ls rpmbuild/SPECS/
+   95  ls rpmbuild/SOURCES/
+   96  rpmbuild -bs ~/rpmbuild/SPECS/kernel.spec
+   97  ls ~/rpmbuild/SRPMS/
+   98  yum-builddep /home/defanov/rpmbuild/SRPMS/kernel-5.12.6-300.fc34.src.rpm
+   99  rpmbuild -bp --target=$(uname -m) rpmbuild/SPECS/kernel.spec
+  100  cd rpmbuild/BUILD/kernel*/linux*
+  101  ls ~/rpmbuild/BUILD/kernel-5.12.6-300.fc34/linux-kernel-5.12.6-300.fc34.spartak.x86_64/
