@@ -1,0 +1,29 @@
+  133  ldd /bin/ls | grep selinux
+  134  ls -l /etc/selinux/
+  135  ls -l /etc/selinux/targeted/
+  136  id -Z
+  137  ls -Z /etc/passwd /etc/group /etc/shadow
+  138  ls -Z /etc/login.defs /etc/sudoers
+  139  ls -Z /usr/bin/passwd 
+  140  ls -Z /usr/sbin/useradd
+  141  getfattr -n security.selinux /etc/passwd
+  142  ps Zaux
+  143  ls /proc/$$/attr
+  144  ps Z $(pgrep passwd)
+  145  netstat -tnlpZ
+  146  sestatus 
+  147   getsebool -a | grep httpd
+  148  seinfo 
+  149  seinfo -cfile -x
+  150  seinfo --class | grep file
+  151  grep 'httpd_.*_t' /etc/selinux/targeted/contexts/files/file_contexts
+  152  semanage fcontext -l
+  153  sesearch -T -s httpd_t -t var_log_t
+  154  sesearch -T -s httpd_t -t tmp_t
+  155   sesearch --allow --source passwd_t --target shadow_t --class file
+  156  sesearch -A -s passwd_t -t passwd_exec_t -c file
+  157  sesearch -A -s unconfined_t -t passwd_exec_t -c file
+  158  sesearch -A -s unconfined_t -t passwd_t -c process
+  159  sesearch --type_trans -s unconfined_t -t passwd_exec_t
+  160  ausearch -m avc -ts recent
+  161  seinfo | grep -E '(dontaudit|allow)'
